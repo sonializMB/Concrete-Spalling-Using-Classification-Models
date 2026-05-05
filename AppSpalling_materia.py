@@ -163,36 +163,36 @@ if submitted:
     else:
         st.success(f"Resultado final: No Spalling ({probs_final[0]*100:.4f}%)")
 
-    
-    fig, ax = plt.subplots(figsize=(2.2, 2.2))
-
-    wedges, texts, autotexts = ax.pie(
-        probs_final,
-        labels=labels,
-        autopct="%1.1f%%",
+    fig, ax = plt.subplots(figsize=(1, 1))
+    #GRafica de pastel para mostrar probabilidades del modelo SVM
+    wedges, texts, autotexts=ax.pie(
+        probs_final, #probabilidades de cada clase
+        labels=labels, # etiquetas de las clases
+        autopct="%1.1f%%", # formato de porcentaje
         startangle=90
     )
-
+    
     for text in texts:
-        text.set_fontsize(7)
-
+        text.set_fontsize(5) #tamaño de fuente para las etiquetas de las clases
+    
     for autotext in autotexts:
-        autotext.set_fontsize(7)
-
-    ax.set_title("Predicción", fontsize=9)
-    ax.axis("equal")
-
-    col_g1, col_g2, col_g3 = st.columns([1.5, 1, 1.5])
-
-    with col_g2:
-        st.pyplot(fig, width="stretch")
-
-    plt.close(fig)
+        autotext.set_fontsize(4)#tamaño de fuente para los porcentajes
     
+    ax.set_title("Predicción del modelo final (SVM)",fontsize=8) #título de la gráfica
+    ax.axis("equal")#Para que el gráfico sea circular
     
-    
-    
+    st.pyplot(fig)
 
+    
+    #Mostrar resultados de todos los modelos
+    #with st.expander("**Resultados de los distintos modelos**"):
+    #    st.markdown("""
+    #    **Resultados de predicción:**
+    #    - Modelo: Nombre del modelo de clasificación utilizado.
+    #    - Predicción: Resultado de la predicción (Spalling o No Spalling).
+    #    - Probabilidad: Probabilidad asociada a la clase "Spalling".
+    #    """, unsafe_allow_html=True)
+    #    st.dataframe(df_resultados, width="stretch")
     
 st.markdown("""
     <style>
