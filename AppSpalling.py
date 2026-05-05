@@ -1,9 +1,9 @@
-from PIL import Image
 import streamlit as st
 import pandas as pd
 import joblib
 import numpy as np
 import matplotlib.pyplot as plt
+from PIL import Image
 
 
 #CONFIGURACIÓN DE LA PÁGINA
@@ -164,27 +164,26 @@ if submitted:
         st.success(f"Resultado final: No Spalling ({probs_final[0]*100:.4f}%)")
 
     
+    #Gráfico de pastel para mostrar la probabilidad de Spalling vs No Spalling
     fig, ax = plt.subplots(figsize=(2.2, 2.2))
-
+    #GRafica de pastel para mostrar probabilidades del modelo SVM
     wedges, texts, autotexts = ax.pie(
         probs_final,
         labels=labels,
         autopct="%1.1f%%",
         startangle=90
     )
-
-    for text in texts:
+    for text in texts: #Ajustar tamaño de fuente de las etiquetas
         text.set_fontsize(7)
-
-    for autotext in autotexts:
+    for autotext in autotexts: #Ajustar tamaño de fuente de los porcentajes
         autotext.set_fontsize(7)
-
     ax.set_title("Predicción", fontsize=9)
     ax.axis("equal")
 
+    # Mostrar la gráfica en el centro de la página utilizando columnas
     col_g1, col_g2, col_g3 = st.columns([1.5, 1, 1.5])
 
-    with col_g2:
+    with col_g2:#Mostrar la gráfica en la columna central
         st.pyplot(fig, width="stretch")
 
     plt.close(fig)
@@ -192,8 +191,7 @@ if submitted:
     
     
     
-
-    
+# PIE DE PÁGINA
 st.markdown("""
     <style>
     .stApp {
